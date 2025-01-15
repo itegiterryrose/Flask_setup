@@ -96,7 +96,7 @@ def profile():
     users = cursor.fetchone()
     conn.close()
 
-    return render_template('profile.html', users=users)
+    return render_template('profile.html', id=users[0], username=users[1])
 
 
 
