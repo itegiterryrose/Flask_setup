@@ -88,6 +88,17 @@ def users():
 
     return render_template('users.html', users=users)
 
+@app.route('/profile/')
+def profile():
+    conn = sqlite3.connect('database.db')
+    cursor = conn.cursor()
+    cursor.execute('SELECT id, username FROM users WHERE id != ?', (session['user_id'],))
+    users = cursor.fetchone()
+    conn.close()
+
+    return render_template('profile.html', users=users)
+
+
 
 if __name__ == '__main__':
     app.run(debug=True)
